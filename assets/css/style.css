@@ -35,6 +35,13 @@
     margin-top: 2%;
  }
 
+ .question-result{
+    min-width: 100%;
+    display: inline-block;
+    text-align: center;
+    margin-top: 2%;
+ }
+
 #game-block {
     display: block;
 }
