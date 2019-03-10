@@ -1,0 +1,48 @@
+@import "style-headers.css";
+
+#header-block {
+    min-width: 100%;
+    display: inline-block;
+    text-align: center;
+    margin-top: 8%;
+}
+
+#timer-block {
+    min-width: 100%;
+    display: inline-block;
+    text-align: center;
+    margin-top: 4%;
+ }
+
+ .question {
+    min-width: 100%;
+    display: inline-block;
+    text-align: center;
+    margin-top: 2%;
+ }
+
+ .answer {
+    margin-top: 1%;
+    min-width: 100%;
+    display: inline-block;
+    text-align: center;
+ }
+
+ .end-result{
+    min-width: 100%;
+    display: inline-block;
+    text-align: center;
+    margin-top: 2%;
+ }
+
+#game-block {
+    display: block;
+}
+
+#question-results-block {
+    display: none;
+}
+
+ #game-results-block {
+     display: none;
+ }

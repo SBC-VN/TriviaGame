@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trivially Trival Trivia Game!</title>
+    <link rel="stylesheet" type="text/css" href=".\assets\css\reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href=".\assets\css\style.css">
+</head>
+<body>
+    <main>
+        <div id="header-block">
+            <h1 id="main-title">Trivially Trivial Trivia Game</h1>
+        </div>
+        <div id="game-block">
+            <div id="timer-block">
+                <h3>Time remaining: <span id="remaining-time-field">0</span> seconds.</h3>
+            </div>
+            <div id="question-block">
+                <h3 class="question" id="question-field">Question?</h3>
+            </div>
+            <div id="choice-block">
+                <h4 class="answer" id="answer-1">Answer 1</h4>
+                <h4 class="answer" id="answer-2">Answer 2</h4>
+                <h4 class="answer" id="answer-3">Answer 3</h4>
+                <h4 class="answer" id="answer-4">Answer 4</h4>
+            </div>
+        </div>
+        <div id="question-results-block">            
+        </div>
+        <div id="game-results-block">
+            <h3 class="end-result">Total number of questions: <span id="question-count">0</span></h3> 
+            <h3 class="end-result">Correct answers: <span id="correct-count">0</span></h3>  
+            <h3 class="end-result">Wrong answers: <span id="wrong-count">0</span></h3>
+            <button type="button" class="btn btn-outline-primary end-result">Play Again</button>   
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src=".\assets\javascript\questions.js"></script>
+    <script src=".\assets\javascript\game.js"></script>
+</body>
+</html>
