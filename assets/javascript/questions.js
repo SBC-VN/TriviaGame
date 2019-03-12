@@ -20,7 +20,6 @@ class GameQuestion {
         else {
             this.wasCorrectlyAnswered = false;
         }
-        return this.wasCorrectlyAnswered;
     }
 
     // returns the answers in a somewhat random order, as the first element in the 

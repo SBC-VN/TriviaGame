@@ -8,6 +8,10 @@ const startRemainingTime=10;
 var remainingTime=0;
 
 function displayQuestionResult() {
+    //console.log("displayQuestionResult");
+
+    // Disable handing a click event on an answer..
+    $(".answer").off("click");
     $("#question-results-block").empty();
     $("#game-block").css("display","none");
     $("#question-results-block").css("display","block");
@@ -21,10 +25,13 @@ function displayQuestionResult() {
     else {
         $("#question-results-block").append($("<h1 class='question-result'>").text("Incorrect!"));
     }
-    //setTimeout(setQuestion,1000);
+ 
+    setTimeout(setQuestion,1000);
 }
 
 function displayGameResults() {
+    //console.log("displayGameResults");
+
     clearInterval(timerId);
     $("#question-results-block").empty();
     $("#game-block").css("display","none");
@@ -34,20 +41,15 @@ function displayGameResults() {
     var incorrect = 0;
     var timeout = 0;
 
-    console.log("final results");
     for (var i=0; i<questionArray.length; i++) {
-        console.log("Question id",i);
-        if (questionArray[0].timeOut === true) {
+        if (questionArray[i].timeOut === true) {
             timeout++;
-            console.log("timed out");
         }
-        else if (questionArray[0].wasCorrectlyAnswered === true) {
+        else if (questionArray[i].wasCorrectlyAnswered === true) {
             correct++;
-            console.log("correct");
         }
         else {
             incorrect++;
-            console.log("incorrect");
         }
     }
 
@@ -58,6 +60,8 @@ function displayGameResults() {
 }
 
 function playAgainClickHandler() {
+    //console.log("playAgainClickHander");
+    $("#play-again-button").off("click");
     questionCount =0;
     startQuestion = undefined;
     currentQuestion = undefined;
@@ -66,12 +70,15 @@ function playAgainClickHandler() {
 }
 
 function answerClickHandler(evt) {
+    //console.log("answerClickHandler");
+ 
     clearInterval(timerId);
     var checkAns = currentQuestion.isCorrectAnswer(evt.target.textContent);
     displayQuestionResult();
 }
 
 function timerTickHandler() {
+    //console.log("timerTick");
     if (--remainingTime <= 0) {
         clearInterval(timerId);
         currentQuestion.timeOut = true;
@@ -83,6 +90,7 @@ function timerTickHandler() {
 }
 
 function setQuestion() {
+    //console.log("setQuestion");
     // When we run out of questions, game is over...
     if (questionCount >= questionArray.length) {
         displayGameResults();
