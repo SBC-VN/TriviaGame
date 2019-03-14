@@ -13,7 +13,7 @@ var goodGameAudio;
 var badGameAudio;
 
 function displayQuestionResult() {
-    console.log("displayQuestionResult");
+    // console.log("displayQuestionResult");
 
     // Disable handing a click event on an answer..
     $(".answer").off("click");
@@ -77,7 +77,7 @@ function playAgainClickHandler() {
 }
 
 function answerClickHandler(evt) {
-    console.log("answerClickHandler");
+    //console.log("answerClickHandler");
  
     clearInterval(timerId);
     var checkAns = currentQuestion.isCorrectAnswer(evt.target.textContent);
@@ -95,10 +95,10 @@ function timerTickHandler() {
         $("#remaining-time-field").text(remainingTime);
 
         if (remainingTime > startRemainingTime / 2) {
-             $("#remaining-time-field").css("color","green");
+             $("#remaining-time-field").css("color","lime");
         }
         else if (remainingTime > startRemainingTime / 4) {
-           $("#remaining-time-field").css("color","blue");
+           $("#remaining-time-field").css("color","yellow");
         }
         else {
             $("#remaining-time-field").css("color","red");
@@ -129,7 +129,7 @@ function setQuestion() {
     $("#game-block").css("display","block");
     remainingTime=startRemainingTime;
     $("#remaining-time-field").text(remainingTime);
-    $("#remaining-time-field").css("color","green");
+    $("#remaining-time-field").css("color","lime");
     
     $("#question-field").text(currentQuestion.question);
     var questArray = currentQuestion.getAnswerSet();
@@ -142,6 +142,12 @@ function setQuestion() {
     clearInterval(timerId);
     timerId = setInterval(timerTickHandler,1000);
     $(".answer").on("click",answerClickHandler);
+    $(".answer").on("mouseenter",function(evt) {
+        this.style.color = "blue";
+    });
+    $(".answer").on("mouseleave",function() {
+        this.style.color = "black";
+    });
 }
 
 setQuestion();
