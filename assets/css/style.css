@@ -1,5 +1,15 @@
 @import "style-headers.css";
 
+@font-face {
+    font-family:"Parisienne";
+    src: url("Parisienne-Regular.ttf") format("truetype");
+  }
+
+@font-face {
+    font-family:"GloriaHallelujah";
+    src: url("GloriaHallelujah.ttf") format("truetype");
+}
+
 #header-block {
     min-width: 100%;
     display: inline-block;
@@ -7,11 +17,17 @@
     margin-top: 8%;
 }
 
+#main-title{
+    font-family: 'Parisienne', Times, serif;
+    font-size: 4em;
+}
+
 #timer-block {
     min-width: 100%;
     display: inline-block;
     text-align: center;
     margin-top: 4%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
  }
 
  .question {
@@ -19,6 +35,7 @@
     display: inline-block;
     text-align: center;
     margin-top: 2%;
+    font-family: 'GloriaHallelujah', Times, serif;
  }
 
  .answer {
@@ -26,6 +43,7 @@
     min-width: 100%;
     display: inline-block;
     text-align: center;
+    font-family: 'GloriaHallelujah', Times, serif;
  }
 
  .end-result{

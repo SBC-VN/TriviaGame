@@ -7,8 +7,13 @@ var timerId;
 const startRemainingTime=10;
 var remainingTime=0;
 
+var questionRightAudio = new Audio('assets/images/tada.wav');
+var questionWrongAudio = new Audio('assets/images/Windows Critical Stop.wav');
+var goodGameAudio;
+var badGameAudio;
+
 function displayQuestionResult() {
-    //console.log("displayQuestionResult");
+    console.log("displayQuestionResult");
 
     // Disable handing a click event on an answer..
     $(".answer").off("click");
@@ -21,9 +26,11 @@ function displayQuestionResult() {
     }
     else if (currentQuestion.wasCorrectlyAnswered) {
         $("#question-results-block").append($("<h1 class='question-result'>").text("Correct!"));
+        questionRightAudio.play();
     }
     else {
         $("#question-results-block").append($("<h1 class='question-result'>").text("Incorrect!"));
+        questionWrongAudio.play();
     }
  
     setTimeout(setQuestion,1000);
@@ -70,7 +77,7 @@ function playAgainClickHandler() {
 }
 
 function answerClickHandler(evt) {
-    //console.log("answerClickHandler");
+    console.log("answerClickHandler");
  
     clearInterval(timerId);
     var checkAns = currentQuestion.isCorrectAnswer(evt.target.textContent);
@@ -86,6 +93,16 @@ function timerTickHandler() {
     }
     else {
         $("#remaining-time-field").text(remainingTime);
+
+        if (remainingTime > startRemainingTime / 2) {
+             $("#remaining-time-field").css("color","green");
+        }
+        else if (remainingTime > startRemainingTime / 4) {
+           $("#remaining-time-field").css("color","blue");
+        }
+        else {
+            $("#remaining-time-field").css("color","red");
+        }
     }
 }
 
@@ -112,6 +129,7 @@ function setQuestion() {
     $("#game-block").css("display","block");
     remainingTime=startRemainingTime;
     $("#remaining-time-field").text(remainingTime);
+    $("#remaining-time-field").css("color","green");
     
     $("#question-field").text(currentQuestion.question);
     var questArray = currentQuestion.getAnswerSet();
