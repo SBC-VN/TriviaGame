@@ -151,11 +151,11 @@ function setQuestion() {
     $("#remaining-time-field").text(remainingTime);
     $("#remaining-time-field").css("color","lime");
     
-    $("#question-field").text(currentQuestion.question);
+    $("#question-field").html(currentQuestion.question);
     var questArray = currentQuestion.getAnswerSet();
 
     for (var i=0; i<questArray.length; i++) {
-        $("#answer-"+i).text(questArray[i]);
+        $("#answer-"+i).html(questArray[i]);
     }
 
     questionCount++;

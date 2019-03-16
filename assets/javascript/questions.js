@@ -4,7 +4,9 @@
 
 class GameQuestion {
     constructor(question, correctAnswer, incorrectAnswers) {
-        this.question = question.replace(/&quot;/g, '"').replace(/&#039;/g,"'");
+        //console.log(question);
+        //this.question = question.replace(/&quot;/g, '"').replace(/&#039;/g,"'");
+        this.question = question;
         this.answers = [];
         this.answers[0] = correctAnswer;
         for (var i=0; i<3; i++) {
