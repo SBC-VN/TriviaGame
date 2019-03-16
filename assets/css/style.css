@@ -69,16 +69,28 @@ main {
     margin-top: 2%;
  }
 
-#game-block {
+ #instructions-block{
     display: block;
+    max-width: 90%;
+    margin: auto;
+}
+
+#game-block {
+    display: none;
+    max-width: 90%;
+    margin: auto;
 }
 
 #question-results-block {
     display: none;
+    max-width: 90%;
+    margin: auto;
 }
 
  #game-results-block {
      display: none;
+     max-width: 90%;
+     margin: auto;
  }
 
  #play-again-button {

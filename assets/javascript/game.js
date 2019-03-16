@@ -1,4 +1,14 @@
-populateQuestionArray();
+var queryComplete=false;
+
+function loadQuestions() {
+    var apiURL="https://opentdb.com/api.php?amount=10&type=multiple";
+    queryComplete=false;
+
+    $.ajax({
+        url: apiURL,
+        method: "GET"
+      }).then(processApiResponse);    
+}
 
 var startQuestion;
 var questionCount = 0;
@@ -20,9 +30,14 @@ function displayQuestionResult() {
     $("#question-results-block").empty();
     $("#game-block").css("display","none");
     $("#question-results-block").css("display","block");
+    var nextQuestionWaitTime=1000;
 
     if (currentQuestion.timeOut === true) {
         $("#question-results-block").append($("<h1 class='question-result'>").text("Time's Up!"));
+        $("#question-results-block").append($("<h2 class='question-result'>").text("Answer:"));
+        $("#question-results-block").append($("<h4 class='question-result'>").text(
+            currentQuestion.answers[0]));
+        nextQuestionWaitTime=2000;
     }
     else if (currentQuestion.wasCorrectlyAnswered) {
         $("#question-results-block").append($("<h1 class='question-result'>").text("Correct!"));
@@ -30,10 +45,14 @@ function displayQuestionResult() {
     }
     else {
         $("#question-results-block").append($("<h1 class='question-result'>").text("Incorrect!"));
+        $("#question-results-block").append($("<h2 class='question-result'>").text("Answer:"));
+        $("#question-results-block").append($("<h4 class='question-result'>").text(
+            currentQuestion.answers[0]));
         questionWrongAudio.play();
+        nextQuestionWaitTime=2000;
     }
  
-    setTimeout(setQuestion,1000);
+    setTimeout(setQuestion,nextQuestionWaitTime);
 }
 
 function displayGameResults() {
@@ -73,7 +92,8 @@ function playAgainClickHandler() {
     startQuestion = undefined;
     currentQuestion = undefined;
     $("#game-results-block").css("display","none");
-    setQuestion();
+    $("#instructions-block").css("display","block");
+    loadQuestions();
 }
 
 function answerClickHandler(evt) {
@@ -124,7 +144,7 @@ function setQuestion() {
     currentQuestion = questionArray[curQuestionIndex];
 
     // Set to the game display block and reset the timer.
-    $("#question-results-block","none");
+    $("#question-results-block").css("display","none");
     $("#question-results-block").empty();
     $("#game-block").css("display","block");
     remainingTime=startRemainingTime;
@@ -150,4 +170,12 @@ function setQuestion() {
     });
 }
 
-setQuestion();
+function startGame() {
+    $("#start-button").remove();
+    $("#instructions-block").css("display","none");
+    setQuestion();
+}
+
+loadQuestions()
+
+//setQuestion();

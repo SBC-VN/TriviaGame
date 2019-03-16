@@ -1,17 +1,21 @@
+// Constructor takes the information from the API call and massages it a bit into
+// an internal object that contains tracking information and questions in a 
+// specific order.
+
 class GameQuestion {
-    constructor(question, correctAnswer, answer2, answer3, answer4) {
-        this.question = question;
+    constructor(question, correctAnswer, incorrectAnswers) {
+        this.question = question.replace(/&quot;/g, '"').replace(/&#039;/g,"'");
         this.answers = [];
         this.answers[0] = correctAnswer;
-        this.answers[1] = answer2;
-        this.answers[2] = answer3;
-        this.answers[3] = answer4;
+        for (var i=0; i<3; i++) {
+            this.answers[i+1] = incorrectAnswers[i];
+        }
         this.asked = false;
         this.wasCorrectlyAnswered = false;
         this.timeOut = false;
     }
 
-    // checks an answer to see if it's right.  Keeps track if this question was
+    // function checks an answer to see if it's right.  Keeps track if this question was
     // answered correctly.
     isCorrectAnswer (userAnswer) {
         if (this.answers[0] === userAnswer) {
@@ -22,7 +26,7 @@ class GameQuestion {
         }
     }
 
-    // returns the answers in a somewhat random order, as the first element in the 
+    // function returns the answers in a somewhat random order, as the first element in the 
     // answer array is the correct answer - an astute player would pick out this if
     // the order wasn't changed.
     getAnswerSet() {
@@ -36,39 +40,21 @@ class GameQuestion {
 
         return returnArray;
     }
-};
+};  
 
 var questionArray = [];
 
-function populateQuestionArray() {
-    var indx=0;
-    questionArray[indx++] = new GameQuestion ("Which city is the home of Batman?",
-                                         "Gotham City",
-                                         "Metropolis",
-                                         "New York",
-                                         "Atlantis");
+function processApiResponse(response) {
+    for (var i=0; i<response.results.length; i++) {
+        questionArray[i] = new GameQuestion (response.results[i].question,
+                                             response.results[i].correct_answer,
+                                             response.results[i].incorrect_answers);
+    }
 
-    questionArray[indx++] = new GameQuestion ("In which sport would you perform the Fosbury Flop?",
-                                         "High Jump",
-                                         "Cricket",
-                                         "Akido",
-                                         "Korfball");
-
-    questionArray[indx++] = new GameQuestion ("What’s the total number of dots on a pair of dice?",
-                                         "42",
-                                         "16",
-                                         "32",
-                                         "48");                                  
-
-    questionArray[indx++] = new GameQuestion ("How many strings does a violin have?",
-                                         "4",
-                                         "3",
-                                         "6",
-                                         "5");
-                                         
-    questionArray[indx++] = new GameQuestion ("What is the name of the city where the cartoon family The Simpsons live?",
-                                         "Springfield",
-                                         "South Park",
-                                         "Quahog",
-                                         "Riverdale"); 
+    // Attach the start button *after* the api query is done...
+    var startButton=$("<button type='button' class='btn btn-primary btn-block' id='start-button'>");
+    startButton.text("Start Game");
+    startButton.css("text-align","center");
+    $("#instructions-block").append(startButton);
+    $("#start-button").on("click",startGame);
 }
